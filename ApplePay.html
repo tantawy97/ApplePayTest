@@ -16,10 +16,7 @@ apple-pay-button {
         <apple-pay-button buttonstyle="black" type="plain" locale="en-US"></apple-pay-button>
         
         <script crossorigin
-        src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
-        >
-    </script>
-        <script>
+        src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js">
     async function onApplePayButtonClicked() {
 console.log("clicked")
 var request = null;
@@ -38,7 +35,7 @@ else
             "supportedMethods": "https://apple.com/apple-pay",
             "data": {
                 "version": 3,
-                "merchantIdentifier": "merchant.com.apdemo",
+                "merchantIdentifier": "merchant.com.efinance.paymentgateway",
                 "merchantCapabilities": [
                     "supports3DS"
                 ],
@@ -48,7 +45,7 @@ else
                     "masterCard",
                     "visa"
                 ],
-                "countryCode": "US"
+                "countryCode": "EG"
             }
         }];
         // Define PaymentDetails

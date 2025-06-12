@@ -17,14 +17,16 @@ apple-pay-button {
         
         <script crossorigin
         src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
-        ></script>
+        >
+    </script>
         <script>
     async function onApplePayButtonClicked() {
 
-    // Consider falling back to Apple Pay JS if Payment Request is not available.
-    if (!PaymentRequest) {
-        return;
-    }
+    var request = null;
+if (window.PaymentRequest)
+    request = new PaymentRequest(methods, details, options);
+else
+    // Consider using Apple Pay JS instead.
     
     try {
 

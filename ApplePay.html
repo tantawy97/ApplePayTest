@@ -21,10 +21,13 @@ apple-pay-button {
     </script>
         <script>
     async function onApplePayButtonClicked() {
+console.log("clicked")
+var request = null;
+if (window.PaymentRequest){
 
-    var request = null;
-if (window.PaymentRequest)
     request = new PaymentRequest(methods, details, options);
+    console.log(request)
+}
 else
     // Consider using Apple Pay JS instead.
     

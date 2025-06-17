@@ -16,17 +16,15 @@ apple-pay-button {
         <apple-pay-button buttonstyle="black" type="plain" locale="en-US"></apple-pay-button>
         
         <script crossorigin
-        src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js">
+        src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
+        ></script>
+        <script>
     async function onApplePayButtonClicked() {
-console.log("clicked")
-var request = null;
-if (window.PaymentRequest){
 
-    request = new PaymentRequest(methods, details, options);
-    console.log(request)
-}
-else
-    // Consider using Apple Pay JS instead.
+    // Consider falling back to Apple Pay JS if Payment Request is not available.
+    if (!PaymentRequest) {
+        return;
+    }
     
     try {
 
@@ -45,7 +43,7 @@ else
                     "masterCard",
                     "visa"
                 ],
-                "countryCode": "EG"
+                "countryCode": "US"
             }
         }];
         // Define PaymentDetails
@@ -130,6 +128,59 @@ else
         // Handle errors
     }
 }
+
+
+async function validateMerchant(event) {
+    const response = await fetch('/validate-merchant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ validationURL: event.validationURL })
+    });
+    return await response.json();
+}
+
+
+function calculateTotal(couponCode) {
+    return {
+        label: "Discounted Total",
+        amount: {
+            value: "25.00", // Adjust based on coupon
+            currency: "USD"
+        }
+    };
+}
+
+function calculateDisplayItem(couponCode) {
+    return [
+        {
+            label: "Original Price",
+            amount: { value: "27.50", currency: "USD" }
+        },
+        {
+            label: "Discount",
+            amount: { value: "-2.50", currency: "USD" }
+        }
+    ];
+}
+
+function calculateShippingOptions(couponCode) {
+    return [
+        {
+            id: "standard",
+            label: "Standard Shipping",
+            amount: { value: "0.00", currency: "USD" },
+            selected: true
+        }
+    ];
+}
+
+function calculateError(couponCode) {
+    if (couponCode !== "DISCOUNT10") {
+        return "Invalid coupon code.";
+    }
+    return null;
+}
+
 </script>
-</body>
 </html>
+</body>

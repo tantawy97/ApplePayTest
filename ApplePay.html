@@ -13,7 +13,7 @@ apple-pay-button {
     </Header>
     <body>
 
-        <apple-pay-button buttonstyle="black" type="plain" locale="en-US"></apple-pay-button>
+        <apple-pay-button buttonstyle="black" id="tet" type="plain" locale="en-US"></apple-pay-button>
         
         <script crossorigin
         src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
@@ -21,7 +21,7 @@ apple-pay-button {
         <script>
             
 document.addEventListener("DOMContentLoaded", function () {
-    const applePayButton = document.querySelector("apple-pay-button");
+    const applePayButton = document.getElementById("tet");
     if (applePayButton) {
         applePayButton.addEventListener("click", onApplePayButtonClicked);
     }

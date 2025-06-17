@@ -19,6 +19,14 @@ apple-pay-button {
         src="https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js"
         ></script>
         <script>
+            
+document.addEventListener("DOMContentLoaded", function () {
+    const applePayButton = document.querySelector("apple-pay-button");
+    if (applePayButton) {
+        applePayButton.addEventListener("click", onApplePayButtonClicked);
+    }
+});
+
     async function onApplePayButtonClicked() {
 
     // Consider falling back to Apple Pay JS if Payment Request is not available.
